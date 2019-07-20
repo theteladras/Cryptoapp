@@ -20,6 +20,12 @@ const fetchCurrentData = async () => {
     return coin_data;
 }
 
+//TODO fetch current supply
+
+//TODO fetch current volume
+
+//TODO fetch current cap
+
 const latestPriceQuery = obj => ({
     name: obj.children[3].attribs['data-sort'],
     cap: obj.children[5].attribs['data-sort'],
@@ -38,7 +44,6 @@ const fetchCoinCurrentPrice = async coin => {
     return {
         val: coin_value.toString(),
         change: `${percentage_change}%`,
-        
     }
 }
 

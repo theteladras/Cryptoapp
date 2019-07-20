@@ -30,7 +30,7 @@ app.get('/latest', async (req, res) => {
     }
 });
 
-app.get('/get-coin-data', bodyCoinVerifier, async (req, res) => {
+app.post('/get-coin-data', bodyCoinVerifier, async (req, res) => {
     try {
         const coin = req.body.coin;
         let data = await fetchCoinPastPrice(coin);
@@ -41,7 +41,7 @@ app.get('/get-coin-data', bodyCoinVerifier, async (req, res) => {
     }
 });
 
-app.get('/get-coin-val', bodyCoinVerifier, async (req, res) => {
+app.post('/get-coin-val', bodyCoinVerifier, async (req, res) => {
     try {
         const coin = req.body.coin;
         let data = await fetchCoinCurrentPrice(coin);

@@ -1,4 +1,6 @@
 const bodyCoinVerifier = (req, res, next) => {
+    console.log(req.body);
+    if (!req.body.coin) return res.status(400).send('Error: Coin has to be specified!');
     switch(req.body.coin.toLowerCase()) {
         case 'btc':
             req.body.coin = 'bitcoin';
