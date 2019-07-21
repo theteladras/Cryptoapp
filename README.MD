@@ -9,10 +9,10 @@ The current setup pulls data for five crypto currencies: Bitcoin, Etherium, Ripp
 To geth the project started, first you have to clone to project.
 
 ```
-git clone 'repository url'
+git clone https://github.com/theteladras/Cryptoapp.git
 ```
 
-Than when it is complete run:
+Than when it is complete you will have to install modules from both the root of the cloned directory and from the directory _front_:
 
 ```
 npm i or yarn
