@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import Chart from 'react-google-charts';
 import PropTypes from 'prop-types';
 import { constructChartData } from '../services';

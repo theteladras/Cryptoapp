@@ -27,7 +27,7 @@ const PanelRow = props => (
 
 const renderLogo = name => {
 	if (name) {
-		return <img src={iconParser(name)} className="row_icon" />
+		return <img src={iconParser(name)} className="row_icon" alt="coin icon" />
 	}
 }
 

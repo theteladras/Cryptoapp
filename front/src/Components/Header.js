@@ -4,7 +4,9 @@ import { timeFormer, dateFormer, iconParser } from '../services';
 
 const Header = props => {
 	const [ time, setTime ] = useState(timeFormer());
+
 	setInterval(() => setTime(timeFormer()), 30000);
+
 	const renderContentRight = () => {
 		if (props.selected) {
 			return (
@@ -21,7 +23,7 @@ const Header = props => {
 							<h2 className="header_val">${props.current_coin_val}</h2>
 						</div>
 						<div className="header_coin_info_holder">
-							<h3>Change: </h3>
+							<h3>Change</h3><h4>(24h): </h4>
 							<h2
 								className={`header_val ${props.current_coin_change[0] === '-' ? 'red-txt' : null}`}
 							>
@@ -43,11 +45,13 @@ const Header = props => {
 			</span>
 		);
 	}
+
 	const renderLogo = () => {
 		if (props.selected) {
-			return <img src={iconParser(props.selected)} className="header_icon" />
+			return <img src={iconParser(props.selected)} className="header_icon" alt="coin icon" />
 		}
 	}
+
 	return (
 		<div className="header">
 			{renderLogo()}
