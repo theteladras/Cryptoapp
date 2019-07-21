@@ -1,13 +1,14 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
+const axios = require('axios');
+const { choosen_coins, choosen_coins_symbol } = require('./coins');
 
 // fetch the latest price of specified coin
-const fetchCurrentData = async () => {
+const fetchLatestRecords = async () => {
     const url = 'https://coinmarketcap.com/';
     let web_content = await rp(url);
     let content = $('tbody > tr', web_content);
     let coin_data = [];
-    let choosen_coins = ['Bitcoin', 'Ethereum', 'XRP', 'Litecoin', 'OmiseGO'];
     for (let coin in choosen_coins) {
         for (let i = 0; i < content.length; i++) {
             let coin_row = latestPriceQuery(content[i]);
@@ -20,12 +21,6 @@ const fetchCurrentData = async () => {
     return coin_data;
 }
 
-//TODO fetch current supply
-
-//TODO fetch current volume
-
-//TODO fetch current cap
-
 const latestPriceQuery = obj => ({
     name: obj.children[3].attribs['data-sort'],
     cap: obj.children[5].attribs['data-sort'],
@@ -33,6 +28,29 @@ const latestPriceQuery = obj => ({
     volume: obj.children[9].attribs['data-sort'],
     supply: obj.children[11].attribs['data-sort'],
 });
+
+const fetchAllWeekPrice = async () => {
+    let all_data = {};
+    let coin_data = [];
+    for (let index in choosen_coins) {
+        const url = `https://coinmarketcap.com/currencies/${choosen_coins[index]}/historical-data/`;
+        const web_content = await axios.get(url);
+        const targ_content = $('tbody > tr[class="text-right"]', web_content.data);
+        for (let i = 0; i < 7; i++) {
+            let { date, high, low } = PastPriceQuery(targ_content[i]);
+            coin_data.push({ date, high, low });
+        }
+        all_data[choosen_coins_symbol[index]] = coin_data;
+        coin_data = [];
+    }
+    return all_data;
+}
+
+//TODO fetch current supply
+
+//TODO fetch current volume
+
+//TODO fetch current cap
 
 // current stat of the coin
 const fetchCoinCurrentPrice = async coin => {
@@ -70,7 +88,8 @@ const PastPriceQuery = obj => ({
 });
 
 module.exports = {
-    fetchCurrentData,
+    fetchLatestRecords,
+    fetchAllWeekPrice,
     fetchCoinCurrentPrice,
     fetchCoinPastPrice,
 }

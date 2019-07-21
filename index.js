@@ -5,7 +5,7 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 
-const { fetchCurrentData, fetchCoinPastPrice, fetchCoinCurrentPrice } = require('./services');
+const { fetchLatestRecords, fetchAllWeekPrice, fetchCoinPastPrice, fetchCoinCurrentPrice } = require('./services');
 const { bodyCoinVerifier } = require('./middleware');
 
 const app = express();
@@ -20,9 +20,9 @@ app.use(bodyParser.json());
 // });
 
 // fetch all (selected) latest coin data
-app.get('/latest', async (req, res) => {
+app.get('/api/latest', async (req, res) => {
     try {
-        let data = await fetchCurrentData();
+        let data = await fetchLatestRecords();
         res.send(data);
     }
     catch (e) {
@@ -30,7 +30,17 @@ app.get('/latest', async (req, res) => {
     }
 });
 
-app.post('/get-coin-data', bodyCoinVerifier, async (req, res) => {
+app.get('/api/all-history-val', async (req, res) => {
+    try {
+        let all_data = await fetchAllWeekPrice();
+        res.send(all_data);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+});
+
+app.post('/api/get-coin-data', bodyCoinVerifier, async (req, res) => {
     try {
         const coin = req.body.coin;
         let data = await fetchCoinPastPrice(coin);
@@ -41,7 +51,7 @@ app.post('/get-coin-data', bodyCoinVerifier, async (req, res) => {
     }
 });
 
-app.post('/get-coin-val', bodyCoinVerifier, async (req, res) => {
+app.post('/api/current-value', bodyCoinVerifier, async (req, res) => {
     try {
         const coin = req.body.coin;
         let data = await fetchCoinCurrentPrice(coin);
