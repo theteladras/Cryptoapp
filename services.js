@@ -12,7 +12,7 @@ const fetchLatestRecords = async () => {
     for (let coin in choosen_coins) {
         for (let i = 0; i < content.length; i++) {
             let coin_row = latestPriceQuery(content[i]);
-            if (coin_row.name == choosen_coins[coin]) {
+            if (coin_row.name == choosen_coins[coin] || coin_row.name == choosen_coins_symbol[coin]) {
                 coin_data.push(coin_row);
                 break;
             }

@@ -43,6 +43,12 @@ h2 {
 	align-items: center;
 }
 
+.header_icon {
+	width: 3rem;
+	height: 3rem;
+	margin-left: 1rem;
+}
+
 .header_logo {
 	flex: 1;
 	height: 100%;
@@ -50,6 +56,8 @@ h2 {
 	justify-content: flex-start;
 	align-items: center;
 	padding-left: 20px;
+	font-size: 3rem;
+	text-shadow: 1px 2px 3px rgba(1, 4, 62, 0.8);
 }
 
 .header_menu {
@@ -60,6 +68,18 @@ h2 {
 	justify-content: flex-end;
 	align-items: center;
 	padding-right: 20px;
+}
+
+.header_time_container {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	user-select: none;
+}
+
+.header_time {
+	height: 2rem;
+	text-align: right;
 }
 
 .header_coin_info {
@@ -114,6 +134,39 @@ h2 {
 	width: 100%;
 	justify-content: center;
 	align-items: center;
+	margin-left: 10px;
+	position: relative;
+}
+
+.chart_holder{
+	position: fixed;
+	width: 40%;	
+}
+
+.my_chart {
+	width: 100%;
+}
+
+.chart_btn_container {
+	width: 80%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.chart_btn {
+	width: 5rem;
+	height: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0.2rem;
+	outline: none;
+}
+
+.chart_btn_selected {
+	background-color: skyblue;
 }
 
 .panel {
@@ -135,6 +188,7 @@ h2 {
 	margin-bottom: 10px;
 	box-shadow: 2px 3px 2px 2px rgba(0,0,0,0.2);
 	opacity: 0.9;
+	user-select: none;
 }
 
 .row:hover {
@@ -145,6 +199,19 @@ h2 {
 .row:active {
 	box-shadow: 0 3px 2px 1px rgba(0,0,0,0.5);
 	opacity: 1;
+}
+
+.row_icon {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+.row_coin_name {
+	color: rgb(46, 46, 177) !important;
+	text-decoration: underline;
+	cursor: pointer;
+	font-size: 1rem !important;
+	width: 6rem;
 }
 
 .main_row:hover {
@@ -176,12 +243,6 @@ h2 {
 	background-color: #FFF;
 }
 
-.divider_right_main {
-}
-
-.divider_right {
-}
-
 .col_text_main {
 	color: rgba(240,255,255);
 	font-weight: bold;
@@ -205,4 +266,22 @@ h2 {
 .spinner {
 	width: 5rem;
 	height: 5rem;
+}
+
+@media only screen and (max-width: 800px) {
+	.panel {
+		order: 2;
+	}
+	.chart_container {
+		order: 1;
+		width: 100%;
+	}
+	.chart_holder{
+		position: relative;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.body{
+		flex-direction: column;
+	}
 }

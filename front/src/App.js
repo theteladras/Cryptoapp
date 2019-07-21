@@ -17,13 +17,8 @@ export default class App extends Component {
 	}
 
 	fetchLatestRecords = async () => {
-		try {
-			let { data } = await axios.get('/latest');
-			this.setState({ fetched_data: data, selected: '', loading: false, });
-		}
-		catch (e) {
-			console.log(e);
-		}
+		let { data } = await axios.get('/latest');
+		this.setState({ fetched_data: data, selected: '', loading: false, });
 	}
 
 	fetchCoinData = async coin => {
@@ -36,15 +31,12 @@ export default class App extends Component {
 		this.setState({ current_coin_val: parseFloat(data.val), current_coin_change: data.change });
 	}
 
-	_handleHeaderBtn = index => {
+	_handleBtn = coin => {
 		this.setState({ loading: true }, async () => {
-			if (!index) {
-				this.fetchLatestRecords();
-				return;
-			}
-			this.fetchCurrentCoinVal(index);
-			let data = await this.fetchCoinData(index);
-			this.setState({ selected: index, fetched_data: data, loading: false });
+			if (!coin) return this.fetchLatestRecords();
+			this.fetchCurrentCoinVal(coin);
+			let data = await this.fetchCoinData(coin);
+			this.setState({ selected: coin, fetched_data: data, loading: false });
 		});
 	}
 
@@ -55,13 +47,15 @@ export default class App extends Component {
 					selected={this.state.selected}
 					current_coin_val={this.state.current_coin_val}
 					current_coin_change={this.state.current_coin_change}
+					handleBtn={this._handleBtn}
 				/>
 				<div className="body">
 					<Content
-						handleBtn={this._handleHeaderBtn}
+						handleBtn={this._handleBtn}
 						main={this.state.selected.length}
 						loading={this.state.loading}
 						records={this.state.fetched_data}
+						current_coin_val={this.state.current_coin_val}
 					/>
 				</div>
 			</div>
