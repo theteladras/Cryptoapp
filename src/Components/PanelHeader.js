@@ -1,7 +1,5 @@
-import React from 'react';
-
 const PanelHeader = props => {
-	if (!props.main) {
+	if (props.main) {
 		return (
 			<div className="row main_row">
 				<div className="column divider_right_main">

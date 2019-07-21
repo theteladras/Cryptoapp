@@ -43,6 +43,7 @@ const fetchAllWeekPrice = async () => {
         all_data[choosen_coins_symbol[index]] = coin_data;
         coin_data = [];
     }
+    console.log(all_data);
     return all_data;
 }
 
@@ -55,9 +56,9 @@ const fetchAllWeekPrice = async () => {
 // current stat of the coin
 const fetchCoinCurrentPrice = async coin => {
     const url = `https://coinmarketcap.com/currencies/${coin}/historical-data/`;
-    const web_content = await rp(url);
-    const coin_value = $('span.details-panel-item--price__value', web_content).text();
-    const percentage_change = $('span.text-semi-bold > span', web_content)[0].attribs['data-format-value'];
+    const web_content = await axios.get(url);
+    const coin_value = $('span.details-panel-item--price__value', web_content.data).text();
+    const percentage_change = $('span.text-semi-bold > span', web_content.data)[0].attribs['data-format-value'];
     
     return {
         val: coin_value.toString(),
@@ -68,8 +69,8 @@ const fetchCoinCurrentPrice = async coin => {
 // fetch all the past records of a coin
 const fetchCoinPastPrice = async coin => {
     const url = `https://coinmarketcap.com/currencies/${coin}/historical-data/`;
-    const web_content = await rp(url);
-    const targ_content = $('tbody > tr[class="text-right"]', web_content);
+    const web_content = await axios.get(url);
+    const targ_content = $('tbody > tr[class="text-right"]', web_content.data);
     let data = [];
     for (let i = 0; i < targ_content.length; i++) {
         let day_data = PastPriceQuery(targ_content[i]);

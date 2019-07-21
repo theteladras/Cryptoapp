@@ -1,17 +1,18 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const PanelRow = props => (
-	<div className="row">
-		<div className="column divider_right white">
-			<p className="col_text">{props.data.name}</p>
+	<div className="row" onClick={() => props.handleBtn(props.data.name)}>
+		<div className="column white">
+			<p className="col_text">{props.data.name || props.data.date}</p>
 		</div>
-		<div className="column divider_right white">
-			<p className="col_text">{roundNumber(props.data.price)}</p>
+		<div className="column white">
+			<p className="col_text">{roundNumber(props.data.price || props.data.high)}</p>
 		</div>
-		<div className="column divider_right white">
-			<p className="col_text">{parseInt(props.data.supply)}</p>
+		<div className="column white">
+			<p className="col_text">{parseInt(props.data.supply || props.data.low)}</p>
 		</div>
-		<div className="column divider_right white">
+		<div className="column white">
 			<p className="col_text">{parseFloat(props.data.volume)}</p>
 		</div>
 		<div className="column white">
@@ -21,7 +22,8 @@ const PanelRow = props => (
 );
 
 PanelRow.propTypes = {
-	data: PropTypes.arrayOf(PropTypes.string)
+	data: PropTypes.arrayOf(PropTypes.string),
+	handleBtn: PropTypes.func,
 };
 
 const roundNumber = num => parseInt(parseFloat(num)*100)/100;

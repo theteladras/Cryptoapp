@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // });
 
 // fetch all (selected) latest coin data
-app.get('/api/latest', async (req, res) => {
+app.get('/latest', async (req, res) => {
     try {
         let data = await fetchLatestRecords();
         res.send(data);
@@ -30,7 +30,7 @@ app.get('/api/latest', async (req, res) => {
     }
 });
 
-app.get('/api/all-history-val', async (req, res) => {
+app.get('/all-history-val', async (req, res) => {
     try {
         let all_data = await fetchAllWeekPrice();
         res.send(all_data);
@@ -40,7 +40,7 @@ app.get('/api/all-history-val', async (req, res) => {
     }
 });
 
-app.post('/api/get-coin-data', bodyCoinVerifier, async (req, res) => {
+app.post('/get-coin-data', bodyCoinVerifier, async (req, res) => {
     try {
         const coin = req.body.coin;
         let data = await fetchCoinPastPrice(coin);
@@ -51,7 +51,7 @@ app.post('/api/get-coin-data', bodyCoinVerifier, async (req, res) => {
     }
 });
 
-app.post('/api/current-value', bodyCoinVerifier, async (req, res) => {
+app.post('/current-value', bodyCoinVerifier, async (req, res) => {
     try {
         const coin = req.body.coin;
         let data = await fetchCoinCurrentPrice(coin);
