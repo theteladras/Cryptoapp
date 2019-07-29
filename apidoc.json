@@ -1,0 +1,59 @@
+[
+    {
+        "name": "latest",
+        "methode": "GET",
+        "version": "0.1.0",
+        "description": "Gets all the lates data for the selected coins like: price, supply, volume...",
+        "title": "Latest Coin Data",
+        "url": "localhost:5000/latest",
+        "successCode": 200
+    },
+    {
+        "name": "supply",
+        "methode": "POST",
+        "body": {
+            "coin": "BTC || ETH || LTC || XRP || OMG"
+        },
+        "version": "0.1.0",
+        "description": "Gets the value for the current supply.",
+        "title": "Supply value getter",
+        "url": "localhost:5000/current-supply",
+        "successCode": 200
+    },
+    {
+        "name": "coin",
+        "methode": "POST",
+        "body": {
+            "coin": "BTC || ETH || LTC || XRP || OMG"
+        },
+        "version": "0.1.0",
+        "description": "Gets the data for the specified coin, for the last 30 days.",
+        "title": "Coin history",
+        "url": "localhost:5000/get-coin-data",
+        "successCode": 200
+    },
+    {
+        "name": "value",
+        "methode": "POST",
+        "body": {
+            "coin": "BTC || ETH || LTC || XRP || OMG"
+        },
+        "version": "0.1.0",
+        "description": "Gets the current value of the specified coin and its change for the past 24h.",
+        "title": "Coin Change and Value",
+        "url": "localhost:5000/current-value",
+        "successCode": 200
+    },
+    {
+        "name": "weekVal",
+        "methode": "POST",
+        "body": {
+            "coin": "BTC || ETH || LTC || XRP || OMG"
+        },
+        "version": "0.1.0",
+        "description": "Get the data of the specified coin, seven days ago.",
+        "title": "Week value fetcher",
+        "url": "localhost:5000/current-week-old-value",
+        "successCode": 200
+    }
+]
